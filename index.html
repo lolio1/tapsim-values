@@ -124,7 +124,7 @@ body {
 ========================= */
 .cards {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 20px;
 }
 
@@ -132,7 +132,8 @@ body {
    CARD
 ========================= */
 .card {
-    width: 200px;
+    width: 100%;
+    max-width: 200px;
     padding: 16px;
     border-radius: 18px;
     background: var(--panel-soft);
@@ -142,6 +143,10 @@ body {
     transition: 0.3s;
 }
 
+.layout {
+    width: 100%;
+    overflow: hidden;
+}
 .card:hover {
     transform: translateY(-5px);
 }
