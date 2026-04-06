@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TapSim Values</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+/* =========================
+   ROOT VARIABLES
+========================= */
+:root {
+    --bg: #0a0f1c;
+    --panel: #0f172a;
+    --panel-soft: rgba(15, 23, 42, 0.7);
+    --border: rgba(255,255,255,0.06);
+    --text: #e5e7eb;
+    --muted: #94a3b8;
+    --accent: #3b82f6;
+    --accent-soft: rgba(59,130,246,0.2);
+    --radius: 14px;
+}
+
+/* ========================= */
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: Inter, system-ui, -apple-system, Arial;
+    background: radial-gradient(circle at 20% 20%, #0f172a, #020617);
+    color: var(--text);
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ========================= */
+.layout {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    height: 100vh;
+}
+
+/* ========================= */
+.left {
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.logo {
+    font-size: 44px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.logo span { color: var(--accent); }
+
+.subtitle {
+    max-width: 420px;
+    color: var(--muted);
+    margin-bottom: 40px;
+}
+
+/* ========================= */
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn {
+    width: 240px;
+    padding: 14px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    background: #1f2937;
+    transform: translateY(-1px);
+}
+
+.btn.primary {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    border: none;
+}
+
+/* ========================= */
+.right {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* =========================
+   GRID FOR CARDS
+========================= */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+/* =========================
+   CARD
+========================= */
+.card {
+    width: 200px;
+    padding: 16px;
+    border-radius: 18px;
+    background: var(--panel-soft);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    transition: 0.3s;
+    animation: float 4s ease-in-out infinite alternate;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.pet {
+    width: 70px;
+    height: 70px;
+    border-radius: 14px;
+    margin-bottom: 10px;
+    overflow: hidden; /* important */
+    background: #020617;
+    border: 1px solid var(--border);
+}
+
+/* IMAGE INSIDE */
+.pet img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* keeps it clean */
+    display: block;
+}
+
+.pet svg {
+    width: 40px;
+    height: 40px;
+}
+
+/* ========================= */
+.pet-name {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.pet-value {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+/* ========================= */
+.circle {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 50%;
+    top: 10%;
+    left: 20%;
+}
+
+.circle.small {
+    width: 180px;
+    height: 180px;
+    bottom: 15%;
+    right: 15%;
+}
+
+.grid {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    top: 30%;
+    left: 40%;
+}
+
+/* ========================= */
+@keyframes float {
+    from { transform: translateY(0); }
+    to { transform: translateY(-8px); }
+}
+
+.footer {
+    position: absolute;
+    bottom: 20px;
+    left: 80px;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- LEFT -->
+    <div class="left">
+        <div class="logo">TapSim <span>Values</span></div>
+
+        <div class="subtitle">
+            A reliable, real-time value list for Tap Simulator.
+        </div>
+
+        <div class="buttons">
+            <button class="btn primary" onclick="openValues()">Open Value List</button>
+            <button class="btn">Latest Updates</button>
+            <button class="btn">Join Discord</button>
+            <button class="btn">Credits</button>
+        </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right">
+
+        <!-- DECALS -->
+        <div class="circle"></div>
+        <div class="circle small"></div>
+        <div class="grid"></div>
+
+        <!-- 6 CARDS -->
+        <div class="cards">
+
+            <!-- Repeat 6 times -->
+            <div class="card">
+    <div class="pet">
+        <img src="steampunk-balloon.png" alt="Pet">
+    </div>
+    <div class="pet-name">Steampunk Balloon</div>
+    <div class="pet-value">11000</div>
+</div>
+
+            <div class="card">
+    <div class="pet">
+        <img src="golden-steampunk-balloon.png" alt="Pet">
+    </div>
+    <div class="pet-name">Golden Steampunk Balloon</div>
+    <div class="pet-value">61271</div>
+</div>
+            <div class="card">
+    <div class="pet">
+        <img src="rainbow-steampunk-balloon.png" alt="Pet">
+    </div>
+    <div class="pet-name">Steampunk Balloon</div>
+    <div class="pet-value">N/A</div>
+</div>
+            <div class="card">
+    <div class="pet">
+        <img src="steampunk-balloon.png" alt="Pet">
+    </div>
+    <div class="pet-name">Steampunk Balloon</div>
+    <div class="pet-value">11k</div>
+</div>
+            <div class="card">
+    <div class="pet">
+        <img src="steampunk-balloon.png" alt="Pet">
+    </div>
+    <div class="pet-name">Steampunk Balloon</div>
+    <div class="pet-value">11k</div>
+</div>
+            <div class="card">
+    <div class="pet">
+        <img src="steampunk-balloon.png" alt="Pet">
+    </div>
+    <div class="pet-name">Steampunk Balloon</div>
+    <div class="pet-value">11k</div>
+</div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="footer">© 2026 TapSim Values</div>
+<script>
+function openValues() {
+    window.location.href = "valuelist.html";
+}
+</script>
+</body>
+</html>

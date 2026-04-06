@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TapSim Values</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+/* =========================
+   SAME ROOT AS LOBBY
+========================= */
+:root {
+    --bg: #0a0f1c;
+    --panel: #0f172a;
+    --panel-soft: rgba(15, 23, 42, 0.7);
+    --border: rgba(255,255,255,0.06);
+    --text: #e5e7eb;
+    --muted: #94a3b8;
+    --accent: #3b82f6;
+    --radius: 14px;
+}
+
+/* ========================= */
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: Inter, system-ui, -apple-system, Arial;
+    background: radial-gradient(circle at 20% 20%, #0f172a, #020617);
+    color: var(--text);
+}
+
+/* =========================
+   HEADER (LIKE LEFT PANEL STYLE)
+========================= */
+.header {
+    padding: 60px 80px 20px;
+}
+
+/* SAME LOGO */
+.logo {
+    font-size: 44px;
+    font-weight: 600;
+    letter-spacing: -1px;
+}
+
+.logo span {
+    color: var(--accent);
+}
+
+/* =========================
+   TOP BAR
+========================= */
+.topbar {
+    padding: 0 80px 20px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+/* SAME BUTTON STYLE */
+.btn {
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    background: #1f2937;
+}
+
+/* PRIMARY */
+.primary {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    border: none;
+}
+
+/* INPUTS MATCH STYLE */
+input, select {
+    padding: 12px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: white;
+}
+
+/* =========================
+   GRID
+========================= */
+.grid {
+    padding: 20px 80px 60px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+/* =========================
+   CARD (MATCHES LOBBY STYLE)
+========================= */
+.card {
+    background: var(--panel-soft);
+    backdrop-filter: blur(20px);
+    border-radius: 18px;
+    padding: 14px;
+    border: 1px solid var(--border);
+    transition: 0.2s;
+    position: relative;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* IMAGE */
+.pet {
+    width: 100%;
+    height: 140px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #020617;
+}
+
+.pet img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* TEXT */
+.name {
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.value {
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 6px;
+    color: #dbeafe;
+}
+
+/* VALUE BADGE */
+.badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: rgba(59,130,246,0.2);
+    color: var(--accent);
+}
+
+/* =========================
+   FOOTER
+========================= */
+.footer {
+    padding: 40px 80px;
+    color: #6b7280;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <div class="logo">TapSim <span>Values</span></div>
+</div>
+
+<!-- CONTROLS -->
+<div class="topbar">
+    <button class="btn" onclick="goBack()">← Lobby</button>
+
+    <input type="text" id="search" placeholder="Search pets...">
+
+    <select id="sort">
+        <option value="high">High → Low</option>
+        <option value="low">Low → High</option>
+        <option value="name">A → Z</option>
+    </select>
+</div>
+
+<!-- GRID -->
+<div class="grid" id="grid"></div>
+
+<div class="footer">© 2026 TapSim Values</div>
+
+<script>
+
+let defaultPets = [
+    {name:"Divine Celestia", value:59800},
+    {name:"Reindeer Emperor", value:36000},
+    {name:"Icarus", value:31200}
+];
+function savePets() {
+    localStorage.setItem("pets", JSON.stringify(pets));
+}
+// LOAD FROM STORAGE OR DEFAULT
+let pets = JSON.parse(localStorage.getItem("pets")) || defaultPets;
+
+/* =========================
+   MAIN UPDATE FUNCTION
+========================= */
+function updateDisplay() {
+    let search = document.getElementById("search").value.toLowerCase();
+    let sort = document.getElementById("sort").value;
+
+    let filtered = pets.filter(p =>
+        p.name.toLowerCase().includes(search)
+    );
+
+    // SORTING
+    if (sort === "high") {
+        filtered.sort((a,b)=>b.value - a.value);
+    }
+    else if (sort === "low") {
+        filtered.sort((a,b)=>a.value - b.value);
+    }
+    else if (sort === "name") {
+        filtered.sort((a,b)=>a.name.localeCompare(b.name));
+    }
+
+    render(filtered);
+}
+
+/* =========================
+   RENDER
+========================= */
+function render(data) {
+    let grid = document.getElementById("grid");
+    grid.innerHTML = "";
+
+    data.forEach(pet => {
+        let card = document.createElement("div");
+        card.className = "card";
+
+        card.innerHTML = `
+            <div class="badge">${format(pet.value)}</div>
+
+            <div class="pet">
+                <img src="https://via.placeholder.com/300x200">
+            </div>
+
+            <div class="name">${pet.name}</div>
+            <div class="value">${format(pet.value)}</div>
+        `;
+
+        grid.appendChild(card);
+    });
+}
+
+/* =========================
+   FORMAT
+========================= */
+function format(num) {
+    if (num >= 1000) return (num/1000).toFixed(1) + "K";
+    return num;
+}
+
+/* =========================
+   EVENTS
+========================= */
+document.getElementById("search").addEventListener("input", updateDisplay);
+document.getElementById("sort").addEventListener("change", updateDisplay);
+
+/* =========================
+   BACK
+========================= */
+function goBack() {
+    window.location.href = "lobby.html";
+}
+
+/* =========================
+   INIT
+========================= */
+updateDisplay();
+
+</script>
+
+</body>
+</html>
