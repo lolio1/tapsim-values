@@ -176,7 +176,64 @@ input, select {
 
     /* KEEP GRID SAME but smaller */
     .layout {
-        transform: scale(0.8);
+        /* =========================
+   MOBILE FIX (NO SCALE)
+========================= */
+@media (max-width: 768px) {
+
+    /* Reduce overall spacing */
+    .left {
+        padding: 40px 20px;
+    }
+
+    .right {
+        padding: 20px;
+    }
+
+    /* Smaller logo */
+    .logo {
+        font-size: 30px;
+    }
+
+    /* Buttons slightly smaller */
+    .btn {
+        width: 200px;
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    /* Cards smaller */
+    .card {
+        width: 180px;
+        padding: 12px;
+    }
+
+    /* Pet icon smaller */
+    .pet {
+        width: 60px;
+        height: 60px;
+    }
+
+    /* Text scaling */
+    .pet-name {
+        font-size: 13px;
+    }
+
+    .pet-value {
+        font-size: 12px;
+    }
+
+    /* Make right side fit */
+    .right {
+        justify-content: flex-start;
+    }
+
+    /* CRITICAL: allow horizontal scroll instead of zoom */
+    body {
+        overflow-x: auto;
+    }
+
+}
         transform-origin: top left;
         width: 125%;
     }
