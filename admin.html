@@ -113,12 +113,14 @@ const db = getFirestore(app);
 async function addPet() {
     const name = document.getElementById("name").value;
     const value = Number(document.getElementById("value").value);
+    const image = document.getElementById("image").value;
 
     if (!name || !value) return;
 
     await addDoc(collection(db, "pets"), {
         name,
-        value
+        value,
+        image
     });
 
     location.reload();
@@ -133,12 +135,13 @@ async function loadPets() {
         const pet = docSnap.data();
 
         list.innerHTML += `
-            <div>
-                ${pet.name} - ${pet.value}
-                <button onclick="editPet('${docSnap.id}')">Edit</button>
-                <button onclick="deletePet('${docSnap.id}')">Delete</button>
-            </div>
-        `;
+    <div>
+        <img src="${pet.image}" style="width:40px;height:40px;border-radius:8px;">
+        ${pet.name} - ${pet.value}
+        <button onclick="editPet('${docSnap.id}')">Edit</button>
+        <button onclick="deletePet('${docSnap.id}')">Delete</button>
+    </div>
+`;
     });
 }
 
@@ -166,6 +169,6 @@ window.editPet = editPet;
 loadPets();
 
 </script>
-
+<input id="image" placeholder="Image URL">
 </body>
 </html>

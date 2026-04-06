@@ -303,7 +303,7 @@ function render() {
         grid.innerHTML += `
             <div class="card">
                 <div class="pet">
-                    <img src="https://via.placeholder.com/150">
+                    <img src="${pet.image || 'https://via.placeholder.com/150'}">
                 </div>
                 <div class="name">${pet.name}</div>
                 <div class="value">${pet.value}</div>
