@@ -18,12 +18,13 @@
     --text: #e5e7eb;
     --muted: #94a3b8;
     --accent: #3b82f6;
-    --accent-soft: rgba(59,130,246,0.2);
     --radius: 14px;
 }
 
 /* ========================= */
-* { box-sizing: border-box; }
+* {
+    box-sizing: border-box;
+}
 
 body {
     margin: 0;
@@ -31,17 +32,20 @@ body {
     background: radial-gradient(circle at 20% 20%, #0f172a, #020617);
     color: var(--text);
     height: 100vh;
-    overflow: hidden;
 }
 
-/* ========================= */
+/* =========================
+   GRID LAYOUT
+========================= */
 .layout {
     display: grid;
     grid-template-columns: 1.1fr 1fr;
     height: 100vh;
 }
 
-/* ========================= */
+/* =========================
+   LEFT SIDE
+========================= */
 .left {
     padding: 80px;
     display: flex;
@@ -49,21 +53,33 @@ body {
     justify-content: center;
 }
 
+/* =========================
+   LOGO
+========================= */
 .logo {
     font-size: 44px;
     font-weight: 600;
+    letter-spacing: -1px;
     margin-bottom: 10px;
 }
 
-.logo span { color: var(--accent); }
+.logo span {
+    color: var(--accent);
+}
 
+/* =========================
+   TEXT
+========================= */
 .subtitle {
     max-width: 420px;
     color: var(--muted);
+    line-height: 1.6;
     margin-bottom: 40px;
 }
 
-/* ========================= */
+/* =========================
+   BUTTONS
+========================= */
 .buttons {
     display: flex;
     flex-direction: column;
@@ -77,8 +93,10 @@ body {
     border: 1px solid var(--border);
     background: var(--panel);
     color: white;
+    font-size: 15px;
     cursor: pointer;
-    transition: 0.2s;
+    transition: all 0.2s ease;
+    position: relative;
 }
 
 .btn:hover {
@@ -91,7 +109,9 @@ body {
     border: none;
 }
 
-/* ========================= */
+/* =========================
+   RIGHT SIDE
+========================= */
 .right {
     position: relative;
     display: flex;
@@ -100,7 +120,7 @@ body {
 }
 
 /* =========================
-   GRID FOR CARDS
+   CARDS GRID
 ========================= */
 .cards {
     display: grid;
@@ -120,34 +140,27 @@ body {
     border: 1px solid var(--border);
     box-shadow: 0 10px 30px rgba(0,0,0,0.4);
     transition: 0.3s;
-    animation: float 4s ease-in-out infinite alternate;
 }
 
 .card:hover {
     transform: translateY(-5px);
 }
 
+/* ========================= */
 .pet {
     width: 70px;
     height: 70px;
     border-radius: 14px;
     margin-bottom: 10px;
-    overflow: hidden; /* important */
+    overflow: hidden;
     background: #020617;
     border: 1px solid var(--border);
 }
 
-/* IMAGE INSIDE */
 .pet img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* keeps it clean */
-    display: block;
-}
-
-.pet svg {
-    width: 40px;
-    height: 40px;
+    object-fit: cover;
 }
 
 /* ========================= */
@@ -161,7 +174,9 @@ body {
     color: var(--muted);
 }
 
-/* ========================= */
+/* =========================
+   DECALS
+========================= */
 .circle {
     position: absolute;
     width: 300px;
@@ -190,12 +205,21 @@ body {
     left: 40%;
 }
 
-/* ========================= */
+/* =========================
+   FLOAT
+========================= */
 @keyframes float {
     from { transform: translateY(0); }
     to { transform: translateY(-8px); }
 }
 
+.card {
+    animation: float 4s ease-in-out infinite alternate;
+}
+
+/* =========================
+   FOOTER
+========================= */
 .footer {
     position: absolute;
     bottom: 20px;
@@ -205,56 +229,43 @@ body {
 }
 
 /* =========================
-   MOBILE SCALE (NO LAYOUT CHANGE)
+   MOBILE FIX (NO ZOOM)
 ========================= */
 @media (max-width: 768px) {
 
-    /* SCALE ENTIRE UI */
     body {
-        font-size: 12px;
+        overflow-x: auto;
     }
 
-    /* KEEP GRID SAME but smaller */
-    .layout {
-        /* =========================
-   MOBILE FIX (NO SCALE)
-========================= */
-@media (max-width: 768px) {
-
-    /* Reduce overall spacing */
     .left {
         padding: 40px 20px;
     }
 
     .right {
         padding: 20px;
+        justify-content: flex-start;
     }
 
-    /* Smaller logo */
     .logo {
         font-size: 30px;
     }
 
-    /* Buttons slightly smaller */
     .btn {
         width: 200px;
+        padding: 10px;
         font-size: 14px;
-        padding: 10px;
     }
 
-    /* Cards smaller */
     .card {
         width: 180px;
         padding: 12px;
     }
 
-    /* Pet icon smaller */
     .pet {
         width: 60px;
         height: 60px;
     }
 
-    /* Text scaling */
     .pet-name {
         font-size: 13px;
     }
@@ -263,64 +274,6 @@ body {
         font-size: 12px;
     }
 
-    /* Make right side fit */
-    .right {
-        justify-content: flex-start;
-    }
-
-    /* CRITICAL: allow horizontal scroll instead of zoom */
-    body {
-        overflow-x: auto;
-    }
-
-}
-        transform-origin: top left;
-        width: 125%;
-    }
-
-    /* Reduce spacing */
-    .left {
-        padding: 40px;
-    }
-
-    .right {
-        padding: 20px;
-    }
-
-    /* Smaller logo */
-    .logo {
-        font-size: 28px;
-    }
-
-    /* Buttons smaller */
-    .btn {
-        width: 200px;
-        padding: 10px;
-        font-size: 13px;
-    }
-
-    /* Cards smaller */
-    .card {
-        width: 180px;
-        padding: 12px;
-    }
-
-    /* Pet icons */
-    .pet {
-        width: 60px;
-        height: 60px;
-    }
-
-    /* Text */
-    .pet-name {
-        font-size: 13px;
-    }
-
-    .pet-value {
-        font-size: 12px;
-    }
-
-    /* Decals smaller */
     .circle {
         width: 200px;
         height: 200px;
@@ -336,7 +289,6 @@ body {
         height: 250px;
     }
 
-    /* Footer */
     .footer {
         left: 20px;
         font-size: 11px;
