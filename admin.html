@@ -94,7 +94,9 @@ input {
 <div class="list" id="list"></div>
 
 <script type="module">
-
+if (localStorage.getItem("admin") !== "true") {
+    window.location.href = "login.html";
+}
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
@@ -167,11 +169,12 @@ window.deletePet = deletePet;
 window.editPet = editPet;
 
 loadPets();
-
+<button onclick="logout()">Logout</button>
 window.goLobby = function() {
     window.location.href = "index.html";
 }
 </script>
+<button onclick="logout()">Logout</button>
 <input id="image" placeholder="Image URL">
 </body>
 </html>
