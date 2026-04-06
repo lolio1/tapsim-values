@@ -18,7 +18,20 @@
     --text: #e5e7eb;
     --muted: #94a3b8;
     --accent: #3b82f6;
-    --radius: 14px;
+    --radius: 0.9rem;
+}
+
+/* =========================
+   GLOBAL SCALE SYSTEM
+========================= */
+html {
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 12px; /* scales EVERYTHING down */
+    }
 }
 
 /* ========================= */
@@ -41,13 +54,14 @@ body {
     display: grid;
     grid-template-columns: 1.1fr 1fr;
     height: 100vh;
+    width: 100%;
 }
 
 /* =========================
    LEFT SIDE
 ========================= */
 .left {
-    padding: 80px;
+    padding: 5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -57,10 +71,10 @@ body {
    LOGO
 ========================= */
 .logo {
-    font-size: 44px;
+    font-size: 2.75rem;
     font-weight: 600;
-    letter-spacing: -1px;
-    margin-bottom: 10px;
+    letter-spacing: -0.05rem;
+    margin-bottom: 0.6rem;
 }
 
 .logo span {
@@ -71,10 +85,10 @@ body {
    TEXT
 ========================= */
 .subtitle {
-    max-width: 420px;
+    max-width: 26rem;
     color: var(--muted);
     line-height: 1.6;
-    margin-bottom: 40px;
+    margin-bottom: 2.5rem;
 }
 
 /* =========================
@@ -83,17 +97,17 @@ body {
 .buttons {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 0.75rem;
 }
 
 .btn {
-    width: 240px;
-    padding: 14px;
+    width: 15rem;
+    padding: 0.9rem;
     border-radius: var(--radius);
     border: 1px solid var(--border);
     background: var(--panel);
     color: white;
-    font-size: 15px;
+    font-size: 0.95rem;
     cursor: pointer;
     transition: all 0.2s ease;
     position: relative;
@@ -101,7 +115,7 @@ body {
 
 .btn:hover {
     background: #1f2937;
-    transform: translateY(-1px);
+    transform: translateY(-0.1rem);
 }
 
 .btn.primary {
@@ -125,7 +139,7 @@ body {
 .cards {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px;
+    gap: 1.2rem;
 }
 
 /* =========================
@@ -133,30 +147,26 @@ body {
 ========================= */
 .card {
     width: 100%;
-    max-width: 200px;
-    padding: 16px;
-    border-radius: 18px;
+    max-width: 12.5rem;
+    padding: 1rem;
+    border-radius: 1.1rem;
     background: var(--panel-soft);
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(1.2rem);
     border: 1px solid var(--border);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    box-shadow: 0 0.6rem 2rem rgba(0,0,0,0.4);
     transition: 0.3s;
 }
 
-.layout {
-    width: 100%;
-    overflow: hidden;
-}
 .card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-0.3rem);
 }
 
 /* ========================= */
 .pet {
-    width: 70px;
-    height: 70px;
-    border-radius: 14px;
-    margin-bottom: 10px;
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 0.9rem;
+    margin-bottom: 0.6rem;
     overflow: hidden;
     background: #020617;
     border: 1px solid var(--border);
@@ -171,11 +181,11 @@ body {
 /* ========================= */
 .pet-name {
     font-weight: 600;
-    font-size: 14px;
+    font-size: 0.9rem;
 }
 
 .pet-value {
-    font-size: 13px;
+    font-size: 0.8rem;
     color: var(--muted);
 }
 
@@ -184,8 +194,8 @@ body {
 ========================= */
 .circle {
     position: absolute;
-    width: 300px;
-    height: 300px;
+    width: 18rem;
+    height: 18rem;
     border: 1px solid rgba(255,255,255,0.05);
     border-radius: 50%;
     top: 10%;
@@ -193,19 +203,19 @@ body {
 }
 
 .circle.small {
-    width: 180px;
-    height: 180px;
+    width: 11rem;
+    height: 11rem;
     bottom: 15%;
     right: 15%;
 }
 
 .grid {
     position: absolute;
-    width: 400px;
-    height: 400px;
+    width: 25rem;
+    height: 25rem;
     background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
                       linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-    background-size: 40px 40px;
+    background-size: 2.5rem 2.5rem;
     top: 30%;
     left: 40%;
 }
@@ -215,7 +225,7 @@ body {
 ========================= */
 @keyframes float {
     from { transform: translateY(0); }
-    to { transform: translateY(-8px); }
+    to { transform: translateY(-0.5rem); }
 }
 
 .card {
@@ -227,79 +237,11 @@ body {
 ========================= */
 .footer {
     position: absolute;
-    bottom: 20px;
-    left: 80px;
+    bottom: 1.2rem;
+    left: 5rem;
     color: #6b7280;
-    font-size: 13px;
+    font-size: 0.8rem;
 }
-
-/* =========================
-   MOBILE FIX (NO ZOOM)
-========================= */
-@media (max-width: 768px) {
-
-    body {
-        overflow-x: auto;
-    }
-
-    .left {
-        padding: 40px 20px;
-    }
-
-    .right {
-        padding: 20px;
-        justify-content: flex-start;
-    }
-
-    .logo {
-        font-size: 30px;
-    }
-
-    .btn {
-        width: 200px;
-        padding: 10px;
-        font-size: 14px;
-    }
-
-    .card {
-        width: 180px;
-        padding: 12px;
-    }
-
-    .pet {
-        width: 60px;
-        height: 60px;
-    }
-
-    .pet-name {
-        font-size: 13px;
-    }
-
-    .pet-value {
-        font-size: 12px;
-    }
-
-    .circle {
-        width: 200px;
-        height: 200px;
-    }
-
-    .circle.small {
-        width: 120px;
-        height: 120px;
-    }
-
-    .grid {
-        width: 250px;
-        height: 250px;
-    }
-
-    .footer {
-        left: 20px;
-        font-size: 11px;
-    }
-}
-
 </style>
 </head>
 
