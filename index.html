@@ -204,6 +204,89 @@ body {
     font-size: 13px;
 }
 
+/* =========================
+   MOBILE FIX (LOBBY)
+========================= */
+@media (max-width: 768px) {
+
+    /* STACK LAYOUT */
+    .layout {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    /* LEFT SIDE */
+    .left {
+        padding: 40px 20px;
+        align-items: center;
+        text-align: center;
+    }
+
+    /* LOGO */
+    .logo {
+        font-size: 28px;
+    }
+
+    /* TEXT */
+    .subtitle {
+        max-width: 100%;
+        font-size: 14px;
+    }
+
+    /* BUTTONS FULL WIDTH */
+    .buttons {
+        width: 100%;
+        align-items: center;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    /* RIGHT SIDE */
+    .right {
+        padding: 20px;
+        margin-top: -20px;
+    }
+
+    /* CARD GRID (IMPORTANT CHANGE) */
+    .cards {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    /* CARD SIZE */
+    .card {
+        width: 100%;
+    }
+
+    /* PET IMAGE */
+    .pet {
+        width: 60px;
+        height: 60px;
+        margin: 0 auto 10px;
+    }
+
+    /* TEXT CENTER */
+    .pet-name,
+    .pet-value {
+        text-align: center;
+    }
+
+    /* DECALS REDUCED (cleaner mobile) */
+    .circle,
+    .grid {
+        display: none;
+    }
+
+    /* FOOTER */
+    .footer {
+        position: static;
+        text-align: center;
+        padding: 20px;
+    }
+}
 
 </style>
 </head>
