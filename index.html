@@ -340,6 +340,7 @@ body {
             <button class="btn">Latest Updates</button>
             <button class="btn">Join Discord</button>
             <button class="btn">Credits</button>
+            <button class="btn" onclick="goAdmin()">Admin Panel</button>
         </div>
     </div>
 
@@ -406,10 +407,14 @@ body {
 </div>
 
 <div class="footer">© 2026 TapSim Values</div>
+
 <script>
 function openValues() {
     window.location.href = "valuelist.html";
 }
+window.goAdmin = function() {
+    window.location.href = "login.html";
+};
 </script>
 </body>
 </html>
