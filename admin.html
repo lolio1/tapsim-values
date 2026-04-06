@@ -93,74 +93,77 @@ input {
 <!-- LIST -->
 <div class="list" id="list"></div>
 
-<script>
+<script type="module">
 
-/* LOAD DATA */
-let pets = JSON.parse(localStorage.getItem("pets")) || [];
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-/* RENDER */
-function render() {
-    let list = document.getElementById("list");
-    list.innerHTML = "";
+const firebaseConfig = {
+  apiKey: "AIzaSyBG1OsdiEVZfwJIQNzvvgjZE1EGwWePC_U",
+  authDomain: "tapsim-values.firebaseapp.com",
+  projectId: "tapsim-values",
+  storageBucket: "tapsim-values.firebasestorage.app",
+  messagingSenderId: "808053670075",
+  appId: "1:808053670075:web:a606843badfd99079ee99e"
+};
 
-    pets.forEach((pet, index) => {
-        let div = document.createElement("div");
-        div.className = "item";
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-        div.innerHTML = `
-            <div>${pet.name} - ${pet.value}</div>
-            <div class="actions">
-                <button onclick="editPet(${index})">Edit</button>
-                <button onclick="deletePet(${index})">Delete</button>
-            </div>
-        `;
-
-        list.appendChild(div);
-    });
-
-    save();
-}
-
-/* ADD */
-function addPet() {
-    let name = document.getElementById("name").value;
-    let value = Number(document.getElementById("value").value);
+async function addPet() {
+    const name = document.getElementById("name").value;
+    const value = Number(document.getElementById("value").value);
 
     if (!name || !value) return;
 
-    pets.push({name, value});
-    render();
+    await addDoc(collection(db, "pets"), {
+        name,
+        value
+    });
+
+    location.reload();
 }
 
-/* DELETE */
-function deletePet(i) {
-    pets.splice(i, 1);
-    render();
+async function loadPets() {
+    const snapshot = await getDocs(collection(db, "pets"));
+    const list = document.getElementById("list");
+    list.innerHTML = "";
+
+    snapshot.forEach(docSnap => {
+        const pet = docSnap.data();
+
+        list.innerHTML += `
+            <div>
+                ${pet.name} - ${pet.value}
+                <button onclick="editPet('${docSnap.id}')">Edit</button>
+                <button onclick="deletePet('${docSnap.id}')">Delete</button>
+            </div>
+        `;
+    });
 }
 
-/* EDIT */
-function editPet(i) {
-    let newName = prompt("New name:", pets[i].name);
-    let newValue = prompt("New value:", pets[i].value);
-
-    if (newName) pets[i].name = newName;
-    if (newValue) pets[i].value = Number(newValue);
-
-    render();
+async function deletePet(id) {
+    await deleteDoc(doc(db, "pets", id));
+    location.reload();
 }
 
-/* SAVE */
-function save() {
-    localStorage.setItem("pets", JSON.stringify(pets));
+async function editPet(id) {
+    let newValue = prompt("New value:");
+
+    if (!newValue) return;
+
+    await updateDoc(doc(db, "pets", id), {
+        value: Number(newValue)
+    });
+
+    location.reload();
 }
 
-/* BACK */
-function goBack() {
-    window.location.href = "valuelist.html";
-}
+window.addPet = addPet;
+window.deletePet = deletePet;
+window.editPet = editPet;
 
-/* INIT */
-render();
+loadPets();
 
 </script>
 

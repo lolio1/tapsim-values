@@ -264,95 +264,54 @@ input, select {
 
 <div class="footer">© 2026 TapSim Values</div>
 
-<script>
+<script type="module">
 
-let defaultPets = [
-    {name:"Divine Celestia", value:59800},
-    {name:"Reindeer Emperor", value:36000},
-    {name:"Icarus", value:31200}
-];
-function savePets() {
-    localStorage.setItem("pets", JSON.stringify(pets));
-}
-// LOAD FROM STORAGE OR DEFAULT
-let pets = JSON.parse(localStorage.getItem("pets")) || defaultPets;
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-/* =========================
-   MAIN UPDATE FUNCTION
-========================= */
-function updateDisplay() {
-    let search = document.getElementById("search").value.toLowerCase();
-    let sort = document.getElementById("sort").value;
+const firebaseConfig = {
+  apiKey: "AIzaSyBG1OsdiEVZfwJIQNzvvgjZE1EGwWePC_U",
+  authDomain: "tapsim-values.firebaseapp.com",
+  projectId: "tapsim-values",
+  storageBucket: "tapsim-values.firebasestorage.app",
+  messagingSenderId: "808053670075",
+  appId: "1:808053670075:web:a606843badfd99079ee99e"
+};
 
-    let filtered = pets.filter(p =>
-        p.name.toLowerCase().includes(search)
-    );
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-    // SORTING
-    if (sort === "high") {
-        filtered.sort((a,b)=>b.value - a.value);
-    }
-    else if (sort === "low") {
-        filtered.sort((a,b)=>a.value - b.value);
-    }
-    else if (sort === "name") {
-        filtered.sort((a,b)=>a.name.localeCompare(b.name));
-    }
+let pets = [];
 
-    render(filtered);
+async function loadPets() {
+    const snapshot = await getDocs(collection(db, "pets"));
+    pets = [];
+
+    snapshot.forEach(doc => {
+        pets.push({ id: doc.id, ...doc.data() });
+    });
+
+    render();
 }
 
-/* =========================
-   RENDER
-========================= */
-function render(data) {
-    let grid = document.getElementById("grid");
+function render() {
+    const grid = document.getElementById("grid");
     grid.innerHTML = "";
 
-    data.forEach(pet => {
-        let card = document.createElement("div");
-        card.className = "card";
-
-        card.innerHTML = `
-            <div class="badge">${format(pet.value)}</div>
-
-            <div class="pet">
-                <img src="https://via.placeholder.com/300x200">
+    pets.forEach(pet => {
+        grid.innerHTML += `
+            <div class="card">
+                <div class="pet">
+                    <img src="https://via.placeholder.com/150">
+                </div>
+                <div class="name">${pet.name}</div>
+                <div class="value">${pet.value}</div>
             </div>
-
-            <div class="name">${pet.name}</div>
-            <div class="value">${format(pet.value)}</div>
         `;
-
-        grid.appendChild(card);
     });
 }
 
-/* =========================
-   FORMAT
-========================= */
-function format(num) {
-    if (num >= 1000) return (num/1000).toFixed(1) + "K";
-    return num;
-}
-
-/* =========================
-   EVENTS
-========================= */
-document.getElementById("search").addEventListener("input", updateDisplay);
-document.getElementById("sort").addEventListener("change", updateDisplay);
-
-/* =========================
-   BACK
-========================= */
-function goBack() {
-    window.location.href = "index.html";
-}
-
-/* =========================
-   INIT
-========================= */
-updateDisplay();
+loadPets();
 
 </script>
 
