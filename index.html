@@ -205,86 +205,84 @@ body {
 }
 
 /* =========================
-   MOBILE FIX (LOBBY)
+   MOBILE SCALE (NO LAYOUT CHANGE)
 ========================= */
 @media (max-width: 768px) {
 
-    /* STACK LAYOUT */
+    /* SCALE ENTIRE UI */
+    body {
+        font-size: 12px;
+    }
+
+    /* KEEP GRID SAME but smaller */
     .layout {
-        grid-template-columns: 1fr;
-        height: auto;
+        transform: scale(0.8);
+        transform-origin: top left;
+        width: 125%;
     }
 
-    /* LEFT SIDE */
+    /* Reduce spacing */
     .left {
-        padding: 40px 20px;
-        align-items: center;
-        text-align: center;
+        padding: 40px;
     }
 
-    /* LOGO */
+    .right {
+        padding: 20px;
+    }
+
+    /* Smaller logo */
     .logo {
         font-size: 28px;
     }
 
-    /* TEXT */
-    .subtitle {
-        max-width: 100%;
-        font-size: 14px;
-    }
-
-    /* BUTTONS FULL WIDTH */
-    .buttons {
-        width: 100%;
-        align-items: center;
-    }
-
+    /* Buttons smaller */
     .btn {
-        width: 100%;
-        max-width: 300px;
+        width: 200px;
+        padding: 10px;
+        font-size: 13px;
     }
 
-    /* RIGHT SIDE */
-    .right {
-        padding: 20px;
-        margin-top: -20px;
-    }
-
-    /* CARD GRID (IMPORTANT CHANGE) */
-    .cards {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-
-    /* CARD SIZE */
+    /* Cards smaller */
     .card {
-        width: 100%;
+        width: 180px;
+        padding: 12px;
     }
 
-    /* PET IMAGE */
+    /* Pet icons */
     .pet {
         width: 60px;
         height: 60px;
-        margin: 0 auto 10px;
     }
 
-    /* TEXT CENTER */
-    .pet-name,
+    /* Text */
+    .pet-name {
+        font-size: 13px;
+    }
+
     .pet-value {
-        text-align: center;
+        font-size: 12px;
     }
 
-    /* DECALS REDUCED (cleaner mobile) */
-    .circle,
+    /* Decals smaller */
+    .circle {
+        width: 200px;
+        height: 200px;
+    }
+
+    .circle.small {
+        width: 120px;
+        height: 120px;
+    }
+
     .grid {
-        display: none;
+        width: 250px;
+        height: 250px;
     }
 
-    /* FOOTER */
+    /* Footer */
     .footer {
-        position: static;
-        text-align: center;
-        padding: 20px;
+        left: 20px;
+        font-size: 11px;
     }
 }
 

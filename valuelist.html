@@ -165,59 +165,84 @@ input, select {
 }
 
 /* =========================
-   MOBILE RESPONSIVE
+   MOBILE SCALE (NO LAYOUT CHANGE)
 ========================= */
 @media (max-width: 768px) {
 
-    /* Layout padding */
-    .header {
-        padding: 30px 20px 10px;
+    /* SCALE ENTIRE UI */
+    body {
+        font-size: 12px;
     }
 
-    .topbar {
-        padding: 0 20px 15px;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
+    /* KEEP GRID SAME but smaller */
+    .layout {
+        transform: scale(0.8);
+        transform-origin: top left;
+        width: 125%;
     }
 
-    /* Logo smaller */
+    /* Reduce spacing */
+    .left {
+        padding: 40px;
+    }
+
+    .right {
+        padding: 20px;
+    }
+
+    /* Smaller logo */
     .logo {
         font-size: 28px;
     }
 
-    /* Inputs + buttons full width */
-    input, select, .btn {
-        width: 100%;
+    /* Buttons smaller */
+    .btn {
+        width: 200px;
+        padding: 10px;
+        font-size: 13px;
     }
 
-    /* Grid becomes 1 column */
-    .grid {
-        padding: 20px;
-        grid-template-columns: 1fr;
-    }
-
-    /* Card adjustments */
+    /* Cards smaller */
     .card {
+        width: 180px;
         padding: 12px;
     }
 
+    /* Pet icons */
     .pet {
+        width: 60px;
+        height: 60px;
+    }
+
+    /* Text */
+    .pet-name {
+        font-size: 13px;
+    }
+
+    .pet-value {
+        font-size: 12px;
+    }
+
+    /* Decals smaller */
+    .circle {
+        width: 200px;
+        height: 200px;
+    }
+
+    .circle.small {
+        width: 120px;
         height: 120px;
     }
 
-    .name {
-        font-size: 15px;
-    }
-
-    .value {
-        font-size: 18px;
+    .grid {
+        width: 250px;
+        height: 250px;
     }
 
     /* Footer */
     .footer {
-        padding: 20px;
-        text-align: center;
+        left: 20px;
+        font-size: 11px;
     }
 }
 
